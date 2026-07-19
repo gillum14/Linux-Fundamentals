@@ -2,25 +2,29 @@
 
 ## Overview
 
-Navigating the Linux file system is a fundamental skill for system administrators and cybersecurity professionals. Analysts frequently use these commands to locate logs, configuration files, user directories, and evidence during security investigations.
+Managing files and directories is one of the most fundamental skills in Linux. Security analysts routinely create, organize, move, inspect, and remove files while investigating security incidents, reviewing logs, managing scripts, and collecting forensic evidence.
+
+Understanding how to efficiently navigate and manage the Linux file system is essential when working remotely through a terminal without a graphical user interface.
 
 ---
 
 # Why It Matters
 
-Security analysts routinely work from remote Linux systems without a graphical interface. Understanding how to efficiently navigate the filesystem and inspect files is essential when:
+Linux file management is used daily in cybersecurity to:
 
-- Investigating security incidents
-- Reviewing log files
-- Examining user accounts
-- Finding configuration files
-- Collecting forensic evidence
+- Organize investigation artifacts
+- Review and collect log files
+- Manage scripts and automation tools
+- Navigate remote systems through SSH
+- Locate configuration files
+- Collect and preserve forensic evidence
+- Maintain an organized working environment
 
 ---
 
-# pwd
+# Current Working Directory (`pwd`)
 
-Displays the current working directory.
+Displays the full path of the current working directory.
 
 ### Syntax
 
@@ -28,17 +32,29 @@ Displays the current working directory.
 pwd
 ```
 
-Example Output
+### Example
 
+```bash
+pwd
 ```
+
+Output:
+
+```text
 /home/analyst
 ```
 
+### Common Uses
+
+- Confirm your current location before making changes
+- Verify working directories during investigations
+- Avoid modifying the wrong files or directories
+
 ---
 
-# ls
+# Listing Directory Contents (`ls`)
 
-Lists the contents of the current directory.
+Lists files and directories within the current directory.
 
 ### Syntax
 
@@ -46,28 +62,40 @@ Lists the contents of the current directory.
 ls
 ```
 
-Example Output
+### Example
 
+```bash
+ls
 ```
+
+Output:
+
+```text
 logs
-projects
+notes
 reports
 temp
 ```
 
-Common options
+### Useful Options
 
 ```bash
-ls -l
-ls -a
-ls -lh
+ls -l      # Long listing format
+ls -a      # Show hidden files
+ls -lh     # Human-readable file sizes
 ```
+
+### Common Uses
+
+- View directory contents
+- Verify files exist
+- Confirm successful file operations
 
 ---
 
-# cd
+# Changing Directories (`cd`)
 
-Changes the current directory.
+Changes the current working directory.
 
 ### Relative Path
 
@@ -81,44 +109,172 @@ cd reports
 cd /home/analyst/reports
 ```
 
-Examples
+### Additional Examples
 
 ```bash
 cd ..
+```
 
+Move up one directory.
+
+```bash
 cd ~
+```
 
+Return to the user's home directory.
+
+```bash
 cd /
 ```
 
+Navigate to the root directory.
+
+### Common Uses
+
+- Navigate remote Linux systems
+- Access log directories
+- Locate configuration files
+- Browse forensic evidence
+
 ---
 
-# cat
+# Creating Directories (`mkdir`)
+
+Creates a new directory.
+
+### Syntax
+
+```bash
+mkdir logs
+```
+
+### Example
+
+```bash
+mkdir investigations
+```
+
+### Common Uses
+
+- Organize investigation files
+- Store log collections
+- Create project directories
+- Separate evidence by incident
+
+---
+
+# Removing Directories (`rmdir`)
+
+Removes an empty directory.
+
+### Syntax
+
+```bash
+rmdir temp
+```
+
+### Common Uses
+
+- Remove unused directories
+- Clean up lab environments
+- Maintain organized file structures
+
+> **Note:** `rmdir` only removes empty directories.
+
+---
+
+# Creating Files (`touch`)
+
+Creates an empty file or updates the timestamp of an existing file.
+
+### Syntax
+
+```bash
+touch tasks.txt
+```
+
+### Common Uses
+
+- Create notes
+- Create scripts
+- Create configuration files
+- Prepare documentation
+
+---
+
+# Moving and Renaming Files (`mv`)
+
+Moves or renames files and directories.
+
+### Syntax
+
+Move a file:
+
+```bash
+mv Q3patches.txt /home/analyst/reports/
+```
+
+Rename a file:
+
+```bash
+mv report.txt incident-report.txt
+```
+
+### Common Uses
+
+- Organize investigation artifacts
+- Rename reports
+- Archive logs
+- Move evidence into project folders
+
+---
+
+# Removing Files (`rm`)
+
+Deletes files.
+
+### Syntax
+
+```bash
+rm tempnotes.txt
+```
+
+### Common Uses
+
+- Remove temporary files
+- Delete obsolete scripts
+- Clean lab environments
+
+> **Warning:** Files deleted with `rm` cannot be recovered through the Linux Recycle Bin.
+
+---
+
+# Reading Files (`cat`)
 
 Displays the contents of a file.
 
 ### Syntax
 
 ```bash
-cat Q1_added_users.txt
+cat tasks.txt
 ```
 
-Example
+### Example
 
 ```bash
-cat /home/analyst/reports/users/Q1_added_users.txt
+cat /home/analyst/reports/Q3patches.txt
 ```
 
-Common Uses
+### Common Uses
 
 - Read log files
-- View configuration files
+- Review configuration files
 - Examine reports
-- Review user information
+- Verify file contents
 
 ---
 
-# head
+# Viewing File Headers (`head`)
 
 Displays the beginning of a file.
 
@@ -128,57 +284,117 @@ Displays the beginning of a file.
 head server_logs.txt
 ```
 
-Display first five lines
+Display a specific number of lines:
 
 ```bash
 head -n 5 server_logs.txt
 ```
 
-Common Uses
+### Common Uses
 
 - Preview large log files
-- Verify file contents
-- Quickly inspect reports
+- Inspect reports
+- Verify downloaded files
+
+---
+
+# Editing Files (`nano`)
+
+A simple command-line text editor commonly available on Linux systems.
+
+### Open a File
+
+```bash
+nano tasks.txt
+```
+
+### Basic Keyboard Shortcuts
+
+| Shortcut | Action |
+|-----------|--------|
+| `Ctrl + O` | Save file |
+| `Ctrl + X` | Exit Nano |
+| `Ctrl + K` | Cut current line |
+| `Ctrl + U` | Paste line |
+| `Ctrl + W` | Search within file |
+
+### Common Uses
+
+- Edit configuration files
+- Update documentation
+- Modify scripts
+- Create notes
 
 ---
 
 # Lab Summary
 
-During this lab I practiced:
+During this lab, I practiced:
 
-- Determining the current working directory
-- Navigating directories using relative and absolute paths
-- Listing directory contents
+- Creating directories
+- Removing directories
+- Creating files
+- Moving files
+- Removing files
+- Editing files with Nano
 - Reading file contents
-- Viewing the beginning of log files
+- Navigating Linux directories
 
-Commands practiced:
+### Commands Practiced
 
-- `pwd`
-- `ls`
-- `cd`
-- `cat`
-- `head`
+```text
+pwd
+ls
+cd
+mkdir
+rmdir
+touch
+mv
+rm
+cat
+head
+nano
+```
 
 ---
 
 # Practical Cybersecurity Uses
 
-These commands are frequently used by security analysts when:
+These commands are frequently used when:
 
 - Investigating security incidents
-- Reviewing authentication logs
-- Examining configuration files
-- Reading system reports
 - Collecting forensic evidence
-- Navigating remote Linux systems over SSH
+- Managing log files
+- Organizing investigation artifacts
+- Editing system configuration files
+- Maintaining Linux servers
+- Managing automation scripts
+- Navigating remote systems over SSH
 
 ---
 
 # Key Takeaways
 
 - `pwd` displays the current working directory.
-- `ls` lists files and directories.
+- `ls` lists directory contents.
 - `cd` changes directories.
-- `cat` displays complete file contents.
-- `head` previews the beginning of a file.
+- `mkdir` creates directories.
+- `rmdir` removes empty directories.
+- `touch` creates new files.
+- `mv` moves or renames files.
+- `rm` deletes files.
+- `cat` displays file contents.
+- `head` previews the beginning of files.
+- `nano` provides a simple command-line text editor for modifying files.
+
+---
+
+# Skills Practiced
+
+- Linux File System Navigation
+- File Management
+- Directory Management
+- Command-Line Operations
+- File Editing
+- Terminal Productivity
+- Linux Administration Fundamentals
